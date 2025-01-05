@@ -1,0 +1,315 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/ */
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  /* https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html */
+  [role='list'] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-block-size: 100vh;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  button,
+  input,
+  label {
+    line-height: 1.1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  img,
+  picture {
+    max-inline-size: 100%;
+    display: block;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+}
+
+@layer base {
+  :root {
+    --font-family: 'Roboto', sans-serif;
+    --fw-regular: 400;
+    --fw-bold: 700;
+    --fs-heading: clamp(2.5rem, 2.1479rem + 1.5023vw, 3.5rem);
+    --fs-body: 1rem;
+    --fs-small: 0.75rem;
+
+    --clr-primary: hsl(4, 100%, 67%);
+    --clr-neutral-dark-slate-grey: hsl(234, 29%, 20%);
+    --clr-neutral-charcoal-grey: hsl(235, 18%, 26%);
+    --clr-neutral-grey: hsl(231, 7%, 60%);
+    --clr-neutral-white: hsl(0, 0%, 100%);
+
+    --clr-bg-page: var(--clr-neutral-dark-slate-grey);
+    --clr-bg-component: var(--clr-neutral-white);
+    --clr-text-primary: var(--clr-neutral-dark-slate-grey);
+    --clr-text-accent: var(--clr-neutral-white);
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 2.5rem;
+
+    --border-radius-sm: 0.5rem;
+    --border-radius-lg: 2.25rem;
+
+    --shadow-sm: 0px 15px 60px 0px hsla(0, 0%, 0%, 0.25);
+    --shadow-lg: 0px 16px 32px 0px hsla(4, 100%, 67%, 0.5);
+  }
+  html,
+  body {
+    font-family: var(--font-family);
+    font-size: var(--fs-body);
+    color: var(--clr-text-primary);
+    background-color: var(--clr-bg-component);
+    min-height: 100svh;
+    @media (width > 768px) {
+      background-color: var(--clr-bg-page);
+    }
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: var(--fw-bold);
+  }
+  h1 {
+    font-size: var(--fs-heading);
+    margin-block-end: var(--spacing-md);
+  }
+  p {
+    max-inline-size: 45ch;
+  }
+  p + * {
+    margin-block-start: var(--spacing-xs);
+  }
+
+  main {
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .sign-up {
+    background-color: var(--clr-bg-component);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    gap: var(--spacing-lg);
+
+    @media (width > 768px) {
+      flex-direction: row;
+      margin-inline: auto;
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius-lg);
+      max-inline-size: 58rem;
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  .sign-up__txt {
+    padding: var(--spacing-md);
+    @media (width > 768px) {
+      padding: var(--spacing-xl);
+    }
+    & ul {
+      list-style: none;
+      padding: 0;
+      margin-block-start: var(--spacing-md);
+      margin-block-end: var(--spacing-lg);
+
+      li {
+        position: relative;
+        padding-left: var(--spacing-lg);
+        margin-bottom: var(--spacing-sm);
+      }
+
+      li::before {
+        content: url('../assets/images/icon-list.svg');
+        position: absolute;
+        left: 0;
+        top: 0.25rem;
+      }
+    }
+    & form {
+      display: flex;
+      flex-direction: column;
+    }
+    & label {
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-small);
+    }
+    & input {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--border-radius-sm);
+      border: 1px solid var(--clr-neutral-grey);
+      margin-block-start: var(--spacing-xs);
+      margin-block-end: var(--spacing-md);
+    }
+    & input::placeholder {
+      color: var(--clr-neutral-charcoal-grey);
+    }
+    & input:focus-visible {
+      outline: none;
+      border: 1px solid var(--clr-text-primary);
+    }
+    & input:invalid {
+      border: 1px solid var(--clr-primary);
+      background: rgba(255, 97, 85, 0.15);
+    }
+
+    #email-error {
+      color: var(--clr-primary);
+      font-size: var(--fs-small);
+      font-weight: var(--fw-bold);
+    }
+  }
+  .button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--clr-bg-page);
+    color: var(--clr-text-accent);
+    font-weight: var(--fw-bold);
+    line-height: 150%;
+    border: 0;
+    cursor: pointer;
+    transition:
+      transform 0.2s ease-in,
+      background 0.2s ease-in,
+      box-shadow 0.2s ease-in;
+
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.01);
+    }
+    &:active {
+      background: linear-gradient(204deg, #ff6a3a 0%, #ff527b 100%);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+  .success-message {
+    color: var(--clr-text-primary);
+    background-color: var(--clr-bg-component);
+    min-height: 100vh;
+    max-inline-size: 31.5rem;
+    padding: 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    img {
+      align-self: self-start;
+      margin-block-end: var(--spacing-xl);
+    }
+    p {
+      margin-block-end: var(--spacing-xl);
+    }
+    .button {
+      margin-top: auto;
+    }
+    @media (width > 768px) {
+      min-height: unset;
+      box-shadow: var(--shadow-sm);
+      border-radius: var(--border-radius-lg);
+    }
+  }
+}
+
+@layer layout {
+  @media (width > 768px) {
+    .place-center {
+      display: grid;
+      place-items: center;
+    }
+  }
+}
+
+@layer utilities {
+  .hidden {
+    display: none;
+  }
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
+  }
+  .error-input {
+    border: 1px solid var(--clr-primary);
+    background: rgba(255, 97, 85, 0.15);
+  }
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+ /*    @media (prefers-reduced-motion) {
+      animation: none;
+    } */
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
